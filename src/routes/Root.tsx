@@ -1,11 +1,25 @@
-import { Grid } from '@mantine/core';
+import { AppShell, Tabs } from '@mantine/core';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 export const Root = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const activeTab = location.pathname;
+
   return (
-    <Grid>
-      <Grid.Col span={4}>1</Grid.Col>
-      <Grid.Col span={4}>2</Grid.Col>
-      <Grid.Col span={4}>3</Grid.Col>
-    </Grid>
+    <AppShell header={{ height: 60 }}>
+      <AppShell.Header>Bookings App</AppShell.Header>
+      <AppShell.Main>
+        <Tabs value={activeTab} onChange={(tab) => navigate(`/${tab}`)}>
+          <Tabs.List>
+            <Tabs.Tab value="places">Places</Tabs.Tab>
+            <Tabs.Tab value="bookings">My Bookings</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value={activeTab}>
+            <Outlet />
+          </Tabs.Panel>
+        </Tabs>
+      </AppShell.Main>
+    </AppShell>
   );
 };

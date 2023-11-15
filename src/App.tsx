@@ -4,12 +4,24 @@ import '@mantine/core/styles.css';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
+import { MyBookings } from '@/routes/MyBookings';
+import { Places } from '@/routes/Places';
 import { Root } from '@/routes/Root';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    children: [
+      {
+        path: '/places',
+        element: <Places />,
+      },
+      {
+        path: '/bookings',
+        element: <MyBookings />,
+      },
+    ],
   },
 ]);
 
