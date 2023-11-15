@@ -10,7 +10,13 @@ export const Root = () => {
     <AppShell header={{ height: 60 }}>
       <AppShell.Header>Bookings App</AppShell.Header>
       <AppShell.Main>
-        <Tabs value={activeTab} onChange={(tab) => navigate(`/${tab}`)}>
+        <Tabs
+          value={activeTab}
+          onChange={(tab) => {
+            if (activeTab.includes(tab ?? '')) return;
+            navigate(`/${tab}`);
+          }}
+        >
           <Tabs.List>
             <Tabs.Tab value="places">Places</Tabs.Tab>
             <Tabs.Tab value="bookings">My Bookings</Tabs.Tab>

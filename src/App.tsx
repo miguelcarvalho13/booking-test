@@ -2,33 +2,24 @@
 // All packages except `@mantine/hooks` require styles imports
 import '@mantine/core/styles.css';
 
+import { useMemo } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
-import { MyBookings } from '@/routes/MyBookings';
-import { Places } from '@/routes/Places';
-import { Root } from '@/routes/Root';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { routerBuilder } from '@/config/router';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    children: [
-      {
-        path: '/places',
-        element: <Places />,
-      },
-      {
-        path: '/bookings',
-        element: <MyBookings />,
-      },
-    ],
-  },
-]);
+const queryClient = new QueryClient();
 
 export const App = () => {
+  const router = useMemo(() => {
+    return createBrowserRouter(routerBuilder(queryClient));
+  }, []);
+
   return (
-    <MantineProvider>
-      <RouterProvider router={router} />
-    </MantineProvider>
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider>
+        <RouterProvider router={router} />
+      </MantineProvider>
+    </QueryClientProvider>
   );
 };

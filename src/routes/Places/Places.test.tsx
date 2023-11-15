@@ -1,10 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import { Places } from '@/routes/Places';
-import { Wrapper } from '@/tests/helpers/Wrapper';
+import { screen } from '@testing-library/react';
+import { renderRoute } from '@/tests/helpers/render';
 
 describe('routes/Places', () => {
   it('renders Places route', async () => {
-    render(<Places />, { wrapper: Wrapper });
-    expect(await screen.findByText(/Places content/)).toBeInTheDocument();
+    renderRoute({ path: '/places' });
+    expect(await screen.findByTestId('places-content')).toBeInTheDocument();
   });
 });
