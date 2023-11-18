@@ -11,7 +11,10 @@ const schema = (otherRanges: DateRange[]) =>
     dates: z.tuple([z.date(), z.date()]).refine(
       ([start, end]) => {
         const current = { start, end };
-        return otherRanges.some((other) => isOverlapping(current, other));
+        const hasOverlaps = otherRanges.some((other) =>
+          isOverlapping(current, other),
+        );
+        return !hasOverlaps;
       },
       { message: 'There is an overlap with another Booking' },
     ),
