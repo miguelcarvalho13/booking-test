@@ -65,6 +65,7 @@ export const BookingForm = ({
           </Group>
           <form onSubmit={form.onSubmit(handleSubmit)}>
             <DatePickerInput
+              firstDayOfWeek={0}
               label="Check-in - Checkout"
               type="range"
               placeholder="Check-in - Checkout"

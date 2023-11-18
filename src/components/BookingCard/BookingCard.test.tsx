@@ -24,4 +24,18 @@ describe('components/BookingCard', () => {
     render(<BookingCard booking={booking} />, { wrapper: Wrapper });
     expect(screen.getByText(place.address)).toBeInTheDocument();
   });
+
+  it('renders card with correct dates', () => {
+    const place = generatePlace({ address: 'Tokyo, Japan' });
+    const booking = generateBooking({
+      place,
+      start: new Date(2023, 0, 1),
+      end: new Date(2023, 0, 10),
+    });
+    render(<BookingCard booking={booking} />, { wrapper: Wrapper });
+    expect(screen.getByText(/Check-in/)).toBeInTheDocument();
+    expect(screen.getByText(/January 1, 2023/)).toBeInTheDocument();
+    expect(screen.getByText(/Checkout/)).toBeInTheDocument();
+    expect(screen.getByText(/January 10, 2023/)).toBeInTheDocument();
+  });
 });
