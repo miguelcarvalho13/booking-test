@@ -24,12 +24,14 @@ interface BookingFormProps {
   booking: Partial<Booking>;
   otherBookings: Booking[];
   onClose?: () => void;
+  onSubmit: (dates: [Date, Date]) => void;
 }
 
 export const BookingForm = ({
   booking,
   otherBookings,
   onClose,
+  onSubmit,
 }: BookingFormProps) => {
   const { place } = booking;
   const form = useForm({
@@ -38,6 +40,12 @@ export const BookingForm = ({
       dates: [booking.start, booking.end],
     },
   });
+  const handleSubmit = ({ dates }: { dates: (Date | undefined)[] }) => {
+    const [firstDate, secondDate] = dates;
+    if (!firstDate || !secondDate) throw new Error('Unreachable code');
+
+    onSubmit([firstDate, secondDate]);
+  };
 
   return (
     <Modal.Root opened={true} onClose={() => onClose?.()} size="lg">
@@ -55,11 +63,12 @@ export const BookingForm = ({
               <Text>Lorem ipsum</Text>
             </Stack>
           </Group>
-          <form onSubmit={form.onSubmit((values) => console.log(values))}>
+          <form onSubmit={form.onSubmit(handleSubmit)}>
             <DatePickerInput
               label="Check-in - Checkout"
               type="range"
               placeholder="Check-in - Checkout"
+              required
               {...form.getInputProps('dates')}
             />
 

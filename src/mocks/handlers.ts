@@ -39,6 +39,14 @@ export const handlers = [
     return HttpResponse.json(Array.from(allBookings.values()));
   }),
 
+  http.post(`${BASE_URL}/bookings`, async ({ request }) => {
+    const id = `${Array.from(allBookings.values()).length}`;
+    const body = (await request.json()) as Omit<Booking, 'id'>;
+    const booking = { id, ...body, place: allPlaces.get(body.place.id)! };
+    allBookings.set(id, booking);
+    return HttpResponse.json(allBookings.get(id));
+  }),
+
   // Places
   http.get(`${BASE_URL}/places`, () => {
     return HttpResponse.json(Array.from(allPlaces.values()));

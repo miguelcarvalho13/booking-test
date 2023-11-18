@@ -1,5 +1,6 @@
 import { Booking } from '@/models/Booking';
 import { Place } from '@/models/Place';
+import { RecursivePartial } from '@/utils/type';
 
 const baseUrl =
   import.meta.env.MODE === 'test' ? 'http://localhost:5173/api/' : '/api/';
@@ -26,7 +27,7 @@ export const getById = async <K extends keyof Models, M extends Models[K]>(
 
 export const post = async <K extends keyof Models, M extends Models[K]>(
   pluralizedModel: K,
-  body: Partial<M>,
+  body: RecursivePartial<M>,
 ) => {
   const response = await fetch(`${baseUrl}${pluralizedModel}`, {
     method: 'POST',
@@ -38,7 +39,7 @@ export const post = async <K extends keyof Models, M extends Models[K]>(
 export const patchById = async <K extends keyof Models, M extends Models[K]>(
   pluralizedModel: K,
   id: string,
-  body: Partial<M>,
+  body: RecursivePartial<M>,
 ) => {
   const response = await fetch(`${baseUrl}${pluralizedModel}/${id}`, {
     method: 'PATCH',

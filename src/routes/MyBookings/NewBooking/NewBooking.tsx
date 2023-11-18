@@ -4,6 +4,7 @@ import { BookingForm } from '@/components/BookingForm';
 import { Place } from '@/models/Place';
 import { useBookingsQuery } from '@/queries/bookings';
 import { Booking } from '@/models/Booking';
+import { useCreateBookingMutation } from '@/mutations/bookings';
 
 export const NewBooking = () => {
   const navigate = useNavigate();
@@ -19,12 +20,17 @@ export const NewBooking = () => {
     initialData: initialBookingsData,
   });
   const booking = { place: place as Place };
+  const createBooking = useCreateBookingMutation();
 
   return (
     <BookingForm
       booking={booking}
       otherBookings={bookings ?? []}
       onClose={() => navigate('/bookings', { replace: true })}
+      onSubmit={([start, end]) => {
+        createBooking.mutate({ ...booking, start, end });
+        navigate('/bookings', { replace: true });
+      }}
     />
   );
 };
