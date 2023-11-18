@@ -13,7 +13,7 @@ const schema = (otherRanges: DateRange[]) =>
         const current = { start, end };
         return otherRanges.some((other) => isOverlapping(current, other));
       },
-      { message: 'There is an overlapping with another Booking' },
+      { message: 'There is an overlap with another Booking' },
     ),
   });
 
