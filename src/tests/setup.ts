@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import '@/config/dayjs';
 import { server } from '@/mocks/node';
 
 Object.defineProperty(window, 'matchMedia', {

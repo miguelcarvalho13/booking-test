@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import '@/config/dayjs';
 import { App } from '@/App.tsx';
 
 async function enableMocking() {
