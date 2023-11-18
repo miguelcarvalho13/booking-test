@@ -3,9 +3,10 @@ import { Place } from '@/models/Place';
 
 interface PlaceCardProps {
   place: Place;
+  onBookThisPlace?: (place: Place) => void;
 }
 
-export const PlaceCard = ({ place }: PlaceCardProps) => {
+export const PlaceCard = ({ place, onBookThisPlace }: PlaceCardProps) => {
   return (
     <Card
       data-testid="place-card"
@@ -18,9 +19,18 @@ export const PlaceCard = ({ place }: PlaceCardProps) => {
         <Image src={place.imageUrl} height={160} alt={place.address} />
       </Card.Section>
       <Text fw={500}>{place.address}</Text>
-      <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-        Book this place
-      </Button>
+      {onBookThisPlace && (
+        <Button
+          variant="light"
+          color="blue"
+          fullWidth
+          mt="md"
+          radius="md"
+          onClick={() => onBookThisPlace(place)}
+        >
+          Book this place
+        </Button>
+      )}
     </Card>
   );
 };

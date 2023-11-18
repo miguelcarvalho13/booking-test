@@ -23,8 +23,16 @@ describe('components/PlaceCard', () => {
     expect(screen.getByText(place.address)).toBeInTheDocument();
   });
 
-  it('renders card with book place button', () => {
+  it('renders card without book place button', () => {
     render(<PlaceCard place={generatePlace()} />, { wrapper: Wrapper });
+    const button = screen.queryByRole('button', { name: /Book this place/ });
+    expect(button).not.toBeInTheDocument();
+  });
+
+  it('renders card with book place button', () => {
+    render(<PlaceCard place={generatePlace()} onBookThisPlace={() => {}} />, {
+      wrapper: Wrapper,
+    });
     const button = screen.getByRole('button', { name: /Book this place/ });
     expect(button).toBeInTheDocument();
   });
