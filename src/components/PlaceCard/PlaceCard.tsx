@@ -1,5 +1,5 @@
-import { Place } from '@/models/Place';
 import { Button, Card, Image, Text } from '@mantine/core';
+import { Place } from '@/models/Place';
 
 interface PlaceCardProps {
   place: Place;

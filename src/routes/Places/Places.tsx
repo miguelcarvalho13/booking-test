@@ -1,7 +1,7 @@
+import { useLoaderData } from 'react-router-dom';
+import { Grid } from '@mantine/core';
 import { PlaceCard } from '@/components/PlaceCard';
 import { usePlacesQuery } from '@/queries/places';
-import { Grid } from '@mantine/core';
-import { useLoaderData } from 'react-router-dom';
 
 export const Places = () => {
   const initialData = useLoaderData();
