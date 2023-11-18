@@ -1,5 +1,5 @@
 import { QueryClient } from '@tanstack/react-query';
-import { MyBookings } from '@/routes/MyBookings';
+import { MyBookings, myBookingsLoader } from '@/routes/MyBookings';
 import { NewBooking, newBookingLoader } from '@/routes/MyBookings/NewBooking';
 import { Places, placesLoader } from '@/routes/Places';
 import { Root, rootLoader } from '@/routes';
@@ -18,6 +18,7 @@ export const routerBuilder = (queryClient: QueryClient) => [
       {
         path: 'bookings',
         element: <MyBookings />,
+        loader: myBookingsLoader(queryClient),
         children: [
           {
             path: 'new/:placeId',

@@ -12,13 +12,13 @@ describe('routes/Root', () => {
     const user = userEvent.setup();
     renderRoute({ path: '/' });
     await user.click(await screen.findByRole('tab', { name: /My Bookings/ }));
-    expect(screen.getByText(/My Bookings content/)).toBeInTheDocument();
+    expect(await screen.findByTestId('bookings-content')).toBeInTheDocument();
   });
 
   it('should go to Places route if clicking on its tab', async () => {
     const user = userEvent.setup();
     renderRoute({ path: '/' });
     await user.click(await screen.findByRole('tab', { name: /Places/ }));
-    expect(screen.getByTestId('places-content')).toBeInTheDocument();
+    expect(await screen.findByTestId('places-content')).toBeInTheDocument();
   });
 });

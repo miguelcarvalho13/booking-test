@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import '@/config/dayjs';
 import { server } from '@/mocks/node';
+import { clearServer } from '@/mocks/handlers';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -17,5 +18,8 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
+afterEach(() => {
+  clearServer();
+  server.resetHandlers();
+});
 afterAll(() => server.close());

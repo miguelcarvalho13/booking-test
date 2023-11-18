@@ -5,3 +5,5 @@ export type RecursivePartial<T> = {
       ? RecursivePartial<T[P]>
       : T[P];
 };
+
+export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<T>;

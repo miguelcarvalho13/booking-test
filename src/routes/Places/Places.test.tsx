@@ -8,7 +8,7 @@ describe('routes/Places', () => {
     expect(await screen.findByTestId('places-content')).toBeInTheDocument();
   });
 
-  it('renders places cards', async () => {
+  it('renders cards of places', async () => {
     renderRoute({ path: '/places' });
     await screen.findByTestId('places-content');
     const cards = screen.getAllByTestId('place-card');

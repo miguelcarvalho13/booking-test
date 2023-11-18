@@ -13,9 +13,10 @@ export const useCreateBookingMutation = () => {
     },
 
     onMutate: (booking: NewBooking) => {
+      const newBooking: Booking = { id: 'temp-id', ...booking };
       const previous = queryClient.getQueryData(['bookings']);
       queryClient.setQueryData(['bookings'], (old: Booking[]) => {
-        return [...(old ?? []), { id: 'temp-id', booking }];
+        return [...(old ?? []), newBooking];
       });
 
       return { previous };
