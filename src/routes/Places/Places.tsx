@@ -14,7 +14,7 @@ export const Places = () => {
         <Grid.Col key={place.id} span={{ base: 12, sm: 6, md: 4, lg: 3 }}>
           <PlaceCard
             place={place}
-            onBookThisPlace={({ id }) => navigate(`/bookings/new/${id}`)}
+            onBookThisPlaceClick={({ id }) => navigate(`/bookings/new/${id}`)}
           />
         </Grid.Col>
       ))}
