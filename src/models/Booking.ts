@@ -1,8 +1,7 @@
+import { DateRange } from '@/models/DateRange';
 import { Place } from '@/models/Place';
 
-export interface Booking {
+export interface Booking extends DateRange {
   id: string;
-  start: Date;
-  end: Date;
   place: Place;
 }

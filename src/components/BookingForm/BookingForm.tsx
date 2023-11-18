@@ -3,10 +3,19 @@ import { DatePickerInput } from '@mantine/dates';
 import { useForm, zodResolver } from '@mantine/form';
 import { z } from 'zod';
 import { Booking } from '@/models/Booking';
+import { DateRange } from '@/models/DateRange';
+import { isOverlapping } from '@/utils/date';
 
-const schema = z.object({
-  dates: z.tuple([z.date(), z.date()]),
-});
+const schema = (otherRanges: DateRange[]) =>
+  z.object({
+    dates: z.tuple([z.date(), z.date()]).refine(
+      ([start, end]) => {
+        const current = { start, end };
+        return otherRanges.some((other) => isOverlapping(current, other));
+      },
+      { message: 'There is an overlapping with another Booking' },
+    ),
+  });
 
 interface BookingFormProps {
   booking: Partial<Booking>;
@@ -16,7 +25,7 @@ interface BookingFormProps {
 export const BookingForm = ({ booking, onClose }: BookingFormProps) => {
   const { place } = booking;
   const form = useForm({
-    validate: zodResolver(schema),
+    validate: zodResolver(schema([])),
     initialValues: {
       dates: [booking.start, booking.end],
     },
