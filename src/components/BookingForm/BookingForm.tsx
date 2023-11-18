@@ -22,13 +22,18 @@ const schema = (otherRanges: DateRange[]) =>
 
 interface BookingFormProps {
   booking: Partial<Booking>;
+  otherBookings: Booking[];
   onClose?: () => void;
 }
 
-export const BookingForm = ({ booking, onClose }: BookingFormProps) => {
+export const BookingForm = ({
+  booking,
+  otherBookings,
+  onClose,
+}: BookingFormProps) => {
   const { place } = booking;
   const form = useForm({
-    validate: zodResolver(schema([])),
+    validate: zodResolver(schema(otherBookings)),
     initialValues: {
       dates: [booking.start, booking.end],
     },
