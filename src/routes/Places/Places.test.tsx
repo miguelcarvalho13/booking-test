@@ -6,4 +6,11 @@ describe('routes/Places', () => {
     renderRoute({ path: '/places' });
     expect(await screen.findByTestId('places-content')).toBeInTheDocument();
   });
+
+  it('renders places cards', async () => {
+    renderRoute({ path: '/places' });
+    await screen.findByTestId('places-content');
+    const cards = screen.getAllByTestId('place-card');
+    expect(cards).toHaveLength(3);
+  });
 });
