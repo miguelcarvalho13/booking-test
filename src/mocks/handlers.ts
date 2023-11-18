@@ -4,23 +4,32 @@ import { Place } from '@/models/Place';
 
 const allBookings = new Map<string, Booking>();
 
-const allPlaces: Place[] = [
-  {
-    id: '1',
-    address: 'Recife, Brazil',
-    imageUrl: 'https://placehold.co/600x400',
-  },
-  {
-    id: '2',
-    address: 'Washington, United States',
-    imageUrl: 'https://placehold.co/600x400',
-  },
-  {
-    id: '3',
-    address: 'Tokyo, Japan',
-    imageUrl: 'https://placehold.co/600x400',
-  },
-];
+const allPlaces = new Map<string, Place>([
+  [
+    '1',
+    {
+      id: '1',
+      address: 'Recife, Brazil',
+      imageUrl: 'https://placehold.co/600x400',
+    },
+  ],
+  [
+    '2',
+    {
+      id: '2',
+      address: 'Washington, United States',
+      imageUrl: 'https://placehold.co/600x400',
+    },
+  ],
+  [
+    '3',
+    {
+      id: '3',
+      address: 'Tokyo, Japan',
+      imageUrl: 'https://placehold.co/600x400',
+    },
+  ],
+]);
 
 const BASE_URL = 'http://localhost:5173/api';
 
@@ -32,6 +41,14 @@ export const handlers = [
 
   // Places
   http.get(`${BASE_URL}/places`, () => {
-    return HttpResponse.json(allPlaces);
+    return HttpResponse.json(Array.from(allPlaces.values()));
+  }),
+
+  http.get(`${BASE_URL}/places/:id`, ({ params }) => {
+    const place = allPlaces.get(params.id as string);
+
+    if (!place) return new HttpResponse(null, { status: 404 });
+
+    return HttpResponse.json(place);
   }),
 ];
