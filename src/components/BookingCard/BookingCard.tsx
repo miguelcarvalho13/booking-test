@@ -1,6 +1,7 @@
-import { Card, Group, Image, Stack, Text } from '@mantine/core';
-import { Booking } from '@/models/Booking';
+import { ActionIcon, Card, Group, Image, Stack, Text } from '@mantine/core';
+import { IconPencil, IconTrash } from '@tabler/icons-react';
 import dayjs from 'dayjs';
+import { Booking } from '@/models/Booking';
 
 interface BookingCardProps {
   booking: Booking;
@@ -18,6 +19,14 @@ export const BookingCard = ({ booking }: BookingCardProps) => {
       withBorder
     >
       <Card.Section>
+        <Group pos="absolute" right={0} mr="sm" mt="sm" gap="xs">
+          <ActionIcon aria-label="Edit" radius="lg" variant="white">
+            <IconPencil size={20} />
+          </ActionIcon>
+          <ActionIcon aria-label="Delete" radius="lg" variant="white">
+            <IconTrash size={20} />
+          </ActionIcon>
+        </Group>
         <Image src={place.imageUrl} height={160} alt={place.address} />
       </Card.Section>
       <Text fw={500}>{place.address}</Text>

@@ -7,6 +7,8 @@ describe('components/BookingCard', () => {
   it('renders card as expected', () => {
     render(<BookingCard booking={generateBooking()} />, { wrapper: Wrapper });
     expect(screen.getByTestId('booking-card')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Edit/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Delete/ })).toBeInTheDocument();
   });
 
   it('renders card with correct image', () => {
