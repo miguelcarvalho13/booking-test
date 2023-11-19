@@ -1,4 +1,4 @@
-import { AppShell, Tabs } from '@mantine/core';
+import { AppShell, Tabs, Title } from '@mantine/core';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 export const Root = () => {
@@ -7,8 +7,10 @@ export const Root = () => {
   const activeTab = location.pathname;
 
   return (
-    <AppShell header={{ height: 60 }}>
-      <AppShell.Header>Bookings App</AppShell.Header>
+    <AppShell header={{ height: 80 }}>
+      <AppShell.Header p="md">
+        <Title>Bookings App</Title>
+      </AppShell.Header>
       <AppShell.Main>
         <Tabs
           value={activeTab}
@@ -17,7 +19,7 @@ export const Root = () => {
             navigate(`/${tab}`);
           }}
         >
-          <Tabs.List>
+          <Tabs.List bg="white" pos="sticky" top={80} style={{ zIndex: 1 }}>
             <Tabs.Tab value="places">Places</Tabs.Tab>
             <Tabs.Tab value="bookings">My Bookings</Tabs.Tab>
           </Tabs.List>
