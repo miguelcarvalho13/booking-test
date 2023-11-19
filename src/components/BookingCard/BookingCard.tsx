@@ -1,8 +1,16 @@
-import { ActionIcon, Card, Group, Image, Stack, Text } from '@mantine/core';
+import { Link } from 'react-router-dom';
+import {
+  ActionIcon,
+  Card,
+  Group,
+  Image,
+  Space,
+  Stack,
+  Text,
+} from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import { Booking } from '@/models/Booking';
-import { Link } from 'react-router-dom';
 
 interface BookingCardProps {
   booking: Booking;
@@ -42,15 +50,21 @@ export const BookingCard = ({ booking }: BookingCardProps) => {
         </Group>
         <Image src={place.imageUrl} height={160} alt={place.address} />
       </Card.Section>
+      <Space h="sm" />
       <Text fw={500}>{place.address}</Text>
+      <Space h="sm" />
       <Group justify="space-between">
-        <Stack gap={4}>
-          <Text size="sm">Check-in</Text>
-          <Text>{dayjs(booking.start).format('MMMM D, YYYY')}</Text>
+        <Stack gap={0}>
+          <Text size="xs" fw={500}>
+            Check-in
+          </Text>
+          <Text size="sm">{dayjs(booking.start).format('MMMM D, YYYY')}</Text>
         </Stack>
-        <Stack gap={4}>
-          <Text>Checkout</Text>
-          <Text>{dayjs(booking.end).format('MMMM D, YYYY')}</Text>
+        <Stack gap={0}>
+          <Text size="xs" fw={500}>
+            Checkout
+          </Text>
+          <Text size="sm">{dayjs(booking.end).format('MMMM D, YYYY')}</Text>
         </Stack>
       </Group>
     </Card>
