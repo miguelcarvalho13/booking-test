@@ -50,6 +50,19 @@ export const handlers = [
     return HttpResponse.json(Array.from(allBookings.values()));
   }),
 
+  http.get(`${BASE_URL}/bookings/:id`, ({ params }) => {
+    const booking = allBookings.get(params.id as string);
+    if (!booking) return new HttpResponse(null, { status: 404 });
+    return HttpResponse.json(booking);
+  }),
+
+  http.delete(`${BASE_URL}/bookings/:id`, ({ params }) => {
+    const booking = allBookings.get(params.id as string);
+    if (!booking) return new HttpResponse(null, { status: 404 });
+    allBookings.delete(booking.id);
+    return HttpResponse.json(booking);
+  }),
+
   http.patch(`${BASE_URL}/bookings/:id`, async ({ request, params }) => {
     const id = params.id as string;
     const body = (await request.json()) as Booking;
@@ -61,7 +74,7 @@ export const handlers = [
   http.post(`${BASE_URL}/bookings`, async ({ request }) => {
     const body = (await request.json()) as Omit<Booking, 'id'>;
     const booking = { ...body, place: allPlaces.get(body.place.id)! };
-    return HttpResponse.json(addBookingOnServer(booking));
+    return HttpResponse.json(addBookingOnServer(booking), { status: 201 });
   }),
 
   // Places
@@ -71,9 +84,7 @@ export const handlers = [
 
   http.get(`${BASE_URL}/places/:id`, ({ params }) => {
     const place = allPlaces.get(params.id as string);
-
     if (!place) return new HttpResponse(null, { status: 404 });
-
     return HttpResponse.json(place);
   }),
 ];
