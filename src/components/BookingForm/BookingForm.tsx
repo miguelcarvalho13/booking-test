@@ -66,10 +66,10 @@ export const BookingForm = ({
       title={<Text fw={500}>Choose the dates you will stay at:</Text>}
     >
       <Grid data-testid="place-info" align="flex-start">
-        <Grid.Col span={{ base: 12, xs: 3 }}>
-          <Image src={place?.imageUrl} height={100} />
+        <Grid.Col span={{ base: 12, xs: 4 }}>
+          <Image src={place?.imageUrl} height={200} />
         </Grid.Col>
-        <Grid.Col span={{ base: 12, xs: 9 }}>
+        <Grid.Col span={{ base: 12, xs: 8 }}>
           <Title order={3}>{place?.address}</Title>
           <Space h="sm" />
           <Text>{place?.description}</Text>
