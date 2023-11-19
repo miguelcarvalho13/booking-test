@@ -4,7 +4,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 export const Root = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const activeTab = location.pathname;
+  const [, activeTab] = location.pathname.split('/');
 
   return (
     <AppShell header={{ height: 80 }}>
@@ -19,13 +19,19 @@ export const Root = () => {
             navigate(`/${tab}`);
           }}
         >
-          <Tabs.List bg="white" pos="sticky" top={80} style={{ zIndex: 1 }}>
+          <Tabs.List
+            bg="white"
+            pos="sticky"
+            pl="md"
+            style={{ zIndex: 1 }}
+            top={80}
+          >
             <Tabs.Tab value="places">Places</Tabs.Tab>
             <Tabs.Tab value="bookings">My Bookings</Tabs.Tab>
           </Tabs.List>
-          <Tabs.Panel value={activeTab}>
-            <Outlet />
-          </Tabs.Panel>
+          {/* <Tabs.Panel value={activeTab}> */}
+          <Outlet />
+          {/* </Tabs.Panel> */}
         </Tabs>
       </AppShell.Main>
     </AppShell>

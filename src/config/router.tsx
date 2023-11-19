@@ -16,7 +16,7 @@ export const routerBuilder = (queryClient: QueryClient) => [
   {
     path: '/',
     element: <Root />,
-    loader: rootLoader(queryClient),
+    loader: rootLoader,
     children: [
       {
         path: 'places',

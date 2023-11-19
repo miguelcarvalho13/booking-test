@@ -1,6 +1,7 @@
-import { QueryClient } from '@tanstack/react-query';
-import { placesQuery } from '@/queries/places';
+import { LoaderFunctionArgs, redirect } from 'react-router-dom';
 
-export const rootLoader = (queryClient: QueryClient) => async () => {
-  return queryClient.ensureQueryData(placesQuery());
+export const rootLoader = async ({ request }: LoaderFunctionArgs) => {
+  const url = new URL(request.url);
+  if (url.pathname === '/') return redirect('/places');
+  return null;
 };
