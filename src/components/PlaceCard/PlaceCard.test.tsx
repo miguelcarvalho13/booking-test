@@ -23,6 +23,12 @@ describe('components/PlaceCard', () => {
     expect(screen.getByText(place.address)).toBeInTheDocument();
   });
 
+  it('renders card with correct description', () => {
+    const place = generatePlace({ description: 'Some description' });
+    render(<PlaceCard place={place} />, { wrapper: Wrapper });
+    expect(screen.getByText(place.description)).toBeInTheDocument();
+  });
+
   it('renders card without book place button', () => {
     render(<PlaceCard place={generatePlace()} />, { wrapper: Wrapper });
     const button = screen.queryByRole('button', { name: /Book this place/ });

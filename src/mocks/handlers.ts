@@ -11,6 +11,7 @@ const allPlaces = new Map<string, Place>([
     {
       id: '1',
       address: 'Recife, Brazil',
+      description: `Welcome to your charming rental in Recife, Brazil! Nestled in the heart of this vibrant coastal city, your accommodation offers a perfect blend of modern comfort and traditional Brazilian warmth.`,
       imageUrl: 'https://placehold.co/600x400',
     },
   ],
@@ -19,6 +20,7 @@ const allPlaces = new Map<string, Place>([
     {
       id: '2',
       address: 'Washington, United States',
+      description: `Welcome to your stylish rental in the heart of Washington, D.C.! This contemporary apartment is located in a vibrant neighborhood, offering a perfect blend of urban convenience and historical charm`,
       imageUrl: 'https://placehold.co/600x400',
     },
   ],
@@ -27,6 +29,7 @@ const allPlaces = new Map<string, Place>([
     {
       id: '3',
       address: 'Tokyo, Japan',
+      description: `This contemporary apartment seamlessly blends modern design with traditional Japanese aesthetics, offering a serene and comfortable retreat in this bustling metropolis. Step into a thoughtfully furnished living space adorned with shoji screens, providing a touch of authenticity to your Tokyo experience`,
       imageUrl: 'https://placehold.co/600x400',
     },
   ],
@@ -38,6 +41,15 @@ export const addBookingOnServer = (booking: Optional<Booking, 'id'>) => {
   const id = booking.id ?? `${Array.from(allBookings.values()).length + 1}`;
   allBookings.set(id, { ...booking, id });
   return allBookings.get(id) as Booking;
+};
+
+export const getServerItem = (itemType: 'booking' | 'place', id: string) => {
+  switch (itemType) {
+    case 'booking':
+      return allBookings.get(id);
+    case 'place':
+      return allPlaces.get(id);
+  }
 };
 
 export const clearServer = () => {

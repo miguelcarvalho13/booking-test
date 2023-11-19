@@ -5,6 +5,7 @@ export const generatePlace = (place: Partial<Place> = {}): Place => {
   return {
     id: '1',
     address: '',
+    description: 'Lorem ipsum',
     imageUrl: '',
     ...place,
   };

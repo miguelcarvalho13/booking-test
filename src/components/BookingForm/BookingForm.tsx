@@ -1,4 +1,13 @@
-import { Button, Group, Image, Modal, Stack, Text, Title } from '@mantine/core';
+import {
+  Button,
+  Group,
+  Image,
+  Modal,
+  Space,
+  Stack,
+  Text,
+  Title,
+} from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { useForm, zodResolver } from '@mantine/form';
 import { z } from 'zod';
@@ -56,13 +65,14 @@ export const BookingForm = ({
           <Modal.CloseButton />
         </Modal.Header>
         <Modal.Body>
-          <Group data-testid="place-info" wrap="nowrap">
+          <Group data-testid="place-info" align="flex-start" wrap="nowrap">
             <Image src={place?.imageUrl} height={100} />
             <Stack>
               <Title order={2}>{place?.address}</Title>
-              <Text>Lorem ipsum</Text>
+              <Text>{place?.description}</Text>
             </Stack>
           </Group>
+          <Space h="sm" />
           <form onSubmit={form.onSubmit(handleSubmit)}>
             <DatePickerInput
               firstDayOfWeek={0}

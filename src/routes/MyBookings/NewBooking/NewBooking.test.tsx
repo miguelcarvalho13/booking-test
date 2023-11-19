@@ -2,6 +2,8 @@ import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { mockSystemDate } from '@/tests/helpers/date';
 import { renderRoute } from '@/tests/helpers/render';
+import { getServerItem } from '@/mocks/handlers';
+import { Place } from '@/models/Place';
 
 describe('routes/MyBookings/NewBooking', () => {
   mockSystemDate(new Date(2023, 5, 10));
@@ -17,8 +19,9 @@ describe('routes/MyBookings/NewBooking', () => {
     renderRoute({ path: '/bookings/new/3' });
     const modal = await screen.findByRole('dialog');
     const placeInfo = within(modal).getByTestId('place-info');
-    expect(placeInfo).toHaveTextContent(/Tokyo, Japan/);
-    expect(placeInfo).toHaveTextContent(/Lorem ipsum/);
+    const place = getServerItem('place', '3') as Place;
+    expect(placeInfo).toHaveTextContent(place.address);
+    expect(placeInfo).toHaveTextContent(place.description);
   });
 
   it('should correctly add a booking', async () => {

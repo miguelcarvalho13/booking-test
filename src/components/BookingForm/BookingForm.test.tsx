@@ -20,15 +20,18 @@ describe('components/BookingForm', () => {
   });
 
   it('renders with the correct place info', async () => {
-    const place = generatePlace({ address: 'Tokyo, Japan' });
+    const place = generatePlace({
+      address: 'Tokyo, Japan',
+      description: 'Some description',
+    });
     const booking = generateBooking({ place });
     render(
       <BookingForm booking={booking} otherBookings={[]} onSubmit={() => {}} />,
       { wrapper: Wrapper },
     );
     const placeInfo = await screen.findByTestId('place-info');
-    expect(placeInfo).toHaveTextContent(/Tokyo, Japan/);
-    expect(placeInfo).toHaveTextContent(/Lorem ipsum/);
+    expect(placeInfo).toHaveTextContent(place.address);
+    expect(placeInfo).toHaveTextContent(place.description);
   });
 
   it('shows an error message if it has overlaps with another booking', async () => {

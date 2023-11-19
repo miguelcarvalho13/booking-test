@@ -1,4 +1,4 @@
-import { Button, Card, Image, Text } from '@mantine/core';
+import { Button, Card, Image, Space, Text } from '@mantine/core';
 import { Place } from '@/models/Place';
 
 interface PlaceCardProps {
@@ -18,7 +18,11 @@ export const PlaceCard = ({ place, onBookThisPlaceClick }: PlaceCardProps) => {
       <Card.Section>
         <Image src={place.imageUrl} height={160} alt={place.address} />
       </Card.Section>
+      <Space h="sm" />
       <Text fw={500}>{place.address}</Text>
+      <Text fw={300} lineClamp={2} title={place.description}>
+        {place.description}
+      </Text>
       {onBookThisPlaceClick && (
         <Button
           variant="light"
