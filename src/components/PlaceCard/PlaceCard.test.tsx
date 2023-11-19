@@ -29,20 +29,9 @@ describe('components/PlaceCard', () => {
     expect(screen.getByText(place.description)).toBeInTheDocument();
   });
 
-  it('renders card without book place button', () => {
-    render(<PlaceCard place={generatePlace()} />, { wrapper: Wrapper });
-    const button = screen.queryByRole('button', { name: /Book this place/ });
-    expect(button).not.toBeInTheDocument();
-  });
-
   it('renders card with book place button', () => {
-    render(
-      <PlaceCard place={generatePlace()} onBookThisPlaceClick={() => {}} />,
-      {
-        wrapper: Wrapper,
-      },
-    );
-    const button = screen.getByRole('button', { name: /Book this place/ });
+    render(<PlaceCard place={generatePlace()} />, { wrapper: Wrapper });
+    const button = screen.getByRole('link', { name: /Book this place/ });
     expect(button).toBeInTheDocument();
   });
 });

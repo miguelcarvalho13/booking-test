@@ -20,7 +20,7 @@ describe('routes/Places', () => {
     renderRoute({ path: '/places' });
     await screen.findByTestId('places-content');
     const firstCard = screen.getAllByTestId('place-card')[0];
-    await user.click(within(firstCard).getByRole('button'));
+    await user.click(within(firstCard).getByRole('link'));
     expect(await screen.findByRole('dialog')).toBeInTheDocument();
   });
 });

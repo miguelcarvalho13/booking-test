@@ -1,12 +1,12 @@
 import { Button, Card, Image, Space, Text } from '@mantine/core';
 import { Place } from '@/models/Place';
+import { Link } from 'react-router-dom';
 
 interface PlaceCardProps {
   place: Place;
-  onBookThisPlaceClick?: (place: Place) => void;
 }
 
-export const PlaceCard = ({ place, onBookThisPlaceClick }: PlaceCardProps) => {
+export const PlaceCard = ({ place }: PlaceCardProps) => {
   return (
     <Card
       data-testid="place-card"
@@ -23,18 +23,15 @@ export const PlaceCard = ({ place, onBookThisPlaceClick }: PlaceCardProps) => {
       <Text fw={300} lineClamp={2} title={place.description}>
         {place.description}
       </Text>
-      {onBookThisPlaceClick && (
-        <Button
-          variant="light"
-          color="blue"
-          fullWidth
-          mt="md"
-          radius="md"
-          onClick={() => onBookThisPlaceClick(place)}
-        >
-          Book this place
-        </Button>
-      )}
+      <Button
+        fullWidth
+        radius="md"
+        mt="md"
+        component={Link}
+        to={`/bookings/new/${place.id}`}
+      >
+        Book this place
+      </Button>
     </Card>
   );
 };
