@@ -46,7 +46,7 @@ describe('routes/MyBookings/EditBooking', () => {
       screen.getByRole('button', { name: '10 June 2023', hidden: true }),
     );
     await user.click(
-      screen.getByRole('button', { name: 'Book this place', hidden: true }),
+      screen.getByRole('button', { name: 'Update Booking', hidden: true }),
     );
     const card = within(await screen.findByTestId('booking-card'));
     expect(card.getByText(/Recife, Brazil/)).toBeInTheDocument();

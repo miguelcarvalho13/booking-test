@@ -16,6 +16,7 @@ export const EditBooking = () => {
     <BookingForm
       booking={booking!}
       otherBookings={otherBookings ?? []}
+      submitLabel="Update Booking"
       onClose={() => navigate('/bookings', { replace: true })}
       onSubmit={([start, end]) => {
         updateBooking.mutate({ ...booking!, start, end });

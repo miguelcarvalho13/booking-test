@@ -32,6 +32,7 @@ const schema = (otherRanges: DateRange[]) =>
 interface BookingFormProps {
   booking: Partial<Booking>;
   otherBookings: Booking[];
+  submitLabel?: string;
   onClose?: () => void;
   onSubmit: (dates: [Date, Date]) => void;
 }
@@ -39,6 +40,7 @@ interface BookingFormProps {
 export const BookingForm = ({
   booking,
   otherBookings,
+  submitLabel,
   onClose,
   onSubmit,
 }: BookingFormProps) => {
@@ -84,7 +86,7 @@ export const BookingForm = ({
             />
 
             <Group justify="flex-end" mt="md">
-              <Button type="submit">Book this place</Button>
+              <Button type="submit">{submitLabel ?? 'Book this place'}</Button>
             </Group>
           </form>
         </Modal.Body>
