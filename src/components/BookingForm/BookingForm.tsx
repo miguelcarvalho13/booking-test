@@ -59,39 +59,35 @@ export const BookingForm = ({
   };
 
   return (
-    <Modal.Root opened={true} onClose={() => onClose?.()} size="lg">
-      <Modal.Overlay />
-      <Modal.Content>
-        <Modal.Header>
-          <Modal.Title fw={500}>Choose the dates you will stay at:</Modal.Title>
-          <Modal.CloseButton />
-        </Modal.Header>
-        <Modal.Body>
-          <Group data-testid="place-info" align="flex-start" wrap="nowrap">
-            <Image src={place?.imageUrl} height={100} />
-            <Stack>
-              <Title order={2}>{place?.address}</Title>
-              <Text>{place?.description}</Text>
-            </Stack>
-          </Group>
-          <Space h="sm" />
-          <form onSubmit={form.onSubmit(handleSubmit)}>
-            <DatePickerInput
-              firstDayOfWeek={0}
-              label="Check-in - Checkout"
-              minDate={new Date()}
-              required
-              placeholder="Check-in - Checkout"
-              type="range"
-              {...form.getInputProps('dates')}
-            />
+    <Modal
+      opened={true}
+      onClose={() => onClose?.()}
+      size="lg"
+      title={<Text fw={500}>Choose the dates you will stay at:</Text>}
+    >
+      <Group data-testid="place-info" align="flex-start" wrap="nowrap">
+        <Image src={place?.imageUrl} height={100} />
+        <Stack>
+          <Title order={2}>{place?.address}</Title>
+          <Text>{place?.description}</Text>
+        </Stack>
+      </Group>
+      <Space h="sm" />
+      <form onSubmit={form.onSubmit(handleSubmit)}>
+        <DatePickerInput
+          firstDayOfWeek={0}
+          label="Check-in - Checkout"
+          minDate={new Date()}
+          required
+          placeholder="Check-in - Checkout"
+          type="range"
+          {...form.getInputProps('dates')}
+        />
 
-            <Group justify="flex-end" mt="md">
-              <Button type="submit">{submitLabel ?? 'Book this place'}</Button>
-            </Group>
-          </form>
-        </Modal.Body>
-      </Modal.Content>
-    </Modal.Root>
+        <Group justify="flex-end" mt="md">
+          <Button type="submit">{submitLabel ?? 'Book this place'}</Button>
+        </Group>
+      </form>
+    </Modal>
   );
 };
