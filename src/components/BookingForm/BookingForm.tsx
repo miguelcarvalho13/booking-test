@@ -1,10 +1,10 @@
 import {
   Button,
+  Grid,
   Group,
   Image,
   Modal,
   Space,
-  Stack,
   Text,
   Title,
 } from '@mantine/core';
@@ -65,14 +65,17 @@ export const BookingForm = ({
       size="lg"
       title={<Text fw={500}>Choose the dates you will stay at:</Text>}
     >
-      <Group data-testid="place-info" align="flex-start" wrap="nowrap">
-        <Image src={place?.imageUrl} height={100} />
-        <Stack>
-          <Title order={2}>{place?.address}</Title>
+      <Grid data-testid="place-info" align="flex-start">
+        <Grid.Col span={{ base: 12, xs: 3 }}>
+          <Image src={place?.imageUrl} height={100} />
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, xs: 9 }}>
+          <Title order={3}>{place?.address}</Title>
+          <Space h="sm" />
           <Text>{place?.description}</Text>
-        </Stack>
-      </Group>
-      <Space h="sm" />
+        </Grid.Col>
+      </Grid>
+      <Space h="md" />
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <DatePickerInput
           firstDayOfWeek={0}
