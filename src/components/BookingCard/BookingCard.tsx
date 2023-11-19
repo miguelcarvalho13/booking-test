@@ -2,13 +2,13 @@ import { ActionIcon, Card, Group, Image, Stack, Text } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import { Booking } from '@/models/Booking';
+import { Link } from 'react-router-dom';
 
 interface BookingCardProps {
   booking: Booking;
-  onEdit: (booking: Booking) => void;
 }
 
-export const BookingCard = ({ booking, onEdit }: BookingCardProps) => {
+export const BookingCard = ({ booking }: BookingCardProps) => {
   const { place } = booking;
 
   return (
@@ -25,11 +25,18 @@ export const BookingCard = ({ booking, onEdit }: BookingCardProps) => {
             aria-label="Edit"
             radius="lg"
             variant="white"
-            onClick={() => onEdit(booking)}
+            component={Link}
+            to={`/bookings/edit/${booking.id}`}
           >
             <IconPencil size={20} />
           </ActionIcon>
-          <ActionIcon aria-label="Delete" radius="lg" variant="white">
+          <ActionIcon
+            aria-label="Delete"
+            radius="lg"
+            variant="white"
+            component={Link}
+            to={`/bookings/delete/${booking.id}`}
+          >
             <IconTrash size={20} />
           </ActionIcon>
         </Group>
