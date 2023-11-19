@@ -3,8 +3,11 @@ import userEvent from '@testing-library/user-event';
 import { renderRoute } from '@/tests/helpers/render';
 import { addBookingOnServer } from '@/mocks/handlers';
 import { generateBooking, generatePlace } from '@/tests/helpers/factories';
+import { mockSystemDate } from '@/tests/helpers/date';
 
 describe('routes/MyBookings/EditBooking', () => {
+  mockSystemDate(new Date(2023, 5, 1));
+
   beforeEach(() => {
     addBookingOnServer(
       generateBooking({
@@ -40,7 +43,7 @@ describe('routes/MyBookings/EditBooking', () => {
     });
     await user.click(dateInput);
     await user.click(
-      screen.getByRole('button', { name: '1 June 2023', hidden: true }),
+      screen.getByRole('button', { name: '2 June 2023', hidden: true }),
     );
     await user.click(
       screen.getByRole('button', { name: '10 June 2023', hidden: true }),
@@ -50,7 +53,7 @@ describe('routes/MyBookings/EditBooking', () => {
     );
     const card = within(await screen.findByTestId('booking-card'));
     expect(card.getByText(/Recife, Brazil/)).toBeInTheDocument();
-    expect(card.getByText(/June 1, 2023/)).toBeInTheDocument();
+    expect(card.getByText(/June 2, 2023/)).toBeInTheDocument();
     expect(card.getByText(/June 10, 2023/)).toBeInTheDocument();
   });
 });

@@ -6,7 +6,7 @@ import { getServerItem } from '@/mocks/handlers';
 import { Place } from '@/models/Place';
 
 describe('routes/MyBookings/NewBooking', () => {
-  mockSystemDate(new Date(2023, 5, 10));
+  mockSystemDate(new Date(2023, 5, 1));
 
   it('renders New Booking route', async () => {
     renderRoute({ path: '/bookings/new/3' });
@@ -33,7 +33,7 @@ describe('routes/MyBookings/NewBooking', () => {
     });
     await user.click(dateInput);
     await user.click(
-      screen.getByRole('button', { name: '1 June 2023', hidden: true }),
+      screen.getByRole('button', { name: '2 June 2023', hidden: true }),
     );
     await user.click(
       screen.getByRole('button', { name: '10 June 2023', hidden: true }),
@@ -43,7 +43,7 @@ describe('routes/MyBookings/NewBooking', () => {
     );
     const card = within(await screen.findByTestId('booking-card'));
     expect(card.getByText(/Tokyo, Japan/)).toBeInTheDocument();
-    expect(card.getByText(/June 1, 2023/)).toBeInTheDocument();
+    expect(card.getByText(/June 2, 2023/)).toBeInTheDocument();
     expect(card.getByText(/June 10, 2023/)).toBeInTheDocument();
   });
 });

@@ -79,9 +79,10 @@ export const BookingForm = ({
             <DatePickerInput
               firstDayOfWeek={0}
               label="Check-in - Checkout"
-              type="range"
-              placeholder="Check-in - Checkout"
+              minDate={new Date()}
               required
+              placeholder="Check-in - Checkout"
+              type="range"
               {...form.getInputProps('dates')}
             />
 
