@@ -5,9 +5,10 @@ import { Booking } from '@/models/Booking';
 
 interface BookingCardProps {
   booking: Booking;
+  onEdit: (booking: Booking) => void;
 }
 
-export const BookingCard = ({ booking }: BookingCardProps) => {
+export const BookingCard = ({ booking, onEdit }: BookingCardProps) => {
   const { place } = booking;
 
   return (
@@ -20,7 +21,12 @@ export const BookingCard = ({ booking }: BookingCardProps) => {
     >
       <Card.Section>
         <Group pos="absolute" right={0} mr="sm" mt="sm" gap="xs">
-          <ActionIcon aria-label="Edit" radius="lg" variant="white">
+          <ActionIcon
+            aria-label="Edit"
+            radius="lg"
+            variant="white"
+            onClick={() => onEdit(booking)}
+          >
             <IconPencil size={20} />
           </ActionIcon>
           <ActionIcon aria-label="Delete" radius="lg" variant="white">

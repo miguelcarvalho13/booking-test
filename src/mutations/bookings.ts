@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Booking } from '@/models/Booking';
-import { post } from '@/utils/request';
+import { patchById, post } from '@/utils/request';
 
 type NewBooking = Omit<Booking, 'id'>;
 
@@ -17,6 +17,36 @@ export const useCreateBookingMutation = () => {
       const previous = queryClient.getQueryData(['bookings']);
       queryClient.setQueryData(['bookings'], (old: Booking[]) => {
         return [...(old ?? []), newBooking];
+      });
+
+      return { previous };
+    },
+
+    onError: (_error, _booking, context) => {
+      queryClient.setQueryData(['bookings'], context?.previous);
+    },
+
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ['bookings'] }),
+  });
+};
+
+export const useUpdateBookingMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (booking: Booking) => {
+      return patchById('bookings', booking.id, {
+        ...booking,
+        place: { id: booking.place.id },
+      });
+    },
+
+    onMutate: (booking: Booking) => {
+      const previous = queryClient.getQueryData(['bookings']);
+      queryClient.setQueryData(['bookings'], (old: Booking[]) => {
+        return old.map((oldBooking) => {
+          return oldBooking.id === booking.id ? booking : oldBooking;
+        });
       });
 
       return { previous };

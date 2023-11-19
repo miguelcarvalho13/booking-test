@@ -1,6 +1,10 @@
 import { QueryClient } from '@tanstack/react-query';
 import { MyBookings, myBookingsLoader } from '@/routes/MyBookings';
 import { NewBooking, newBookingLoader } from '@/routes/MyBookings/NewBooking';
+import {
+  EditBooking,
+  editBookingLoader,
+} from '@/routes/MyBookings/EditBooking';
 import { Places, placesLoader } from '@/routes/Places';
 import { Root, rootLoader } from '@/routes';
 
@@ -24,6 +28,11 @@ export const routerBuilder = (queryClient: QueryClient) => [
             path: 'new/:placeId',
             element: <NewBooking />,
             loader: newBookingLoader(queryClient),
+          },
+          {
+            path: 'edit/:bookingId',
+            element: <EditBooking />,
+            loader: editBookingLoader(queryClient),
           },
         ],
       },

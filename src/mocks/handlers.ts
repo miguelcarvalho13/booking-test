@@ -35,7 +35,7 @@ const allPlaces = new Map<string, Place>([
 const BASE_URL = 'http://localhost:5173/api';
 
 export const addBookingOnServer = (booking: Optional<Booking, 'id'>) => {
-  const id = booking.id ?? `${Array.from(allBookings.values()).length}`;
+  const id = booking.id ?? `${Array.from(allBookings.values()).length + 1}`;
   allBookings.set(id, { ...booking, id });
   return allBookings.get(id) as Booking;
 };
@@ -48,6 +48,14 @@ export const handlers = [
   // Bookings
   http.get(`${BASE_URL}/bookings`, () => {
     return HttpResponse.json(Array.from(allBookings.values()));
+  }),
+
+  http.patch(`${BASE_URL}/bookings/:id`, async ({ request, params }) => {
+    const id = params.id as string;
+    const body = (await request.json()) as Booking;
+    const booking = { ...body, place: allPlaces.get(body.place.id)! };
+    allBookings.set(id, booking);
+    return HttpResponse.json(allBookings.get(id));
   }),
 
   http.post(`${BASE_URL}/bookings`, async ({ request }) => {
