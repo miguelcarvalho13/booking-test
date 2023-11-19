@@ -4,7 +4,7 @@ import { renderRoute } from '@/tests/helpers/render';
 import { addBookingOnServer } from '@/mocks/handlers';
 import { generateBooking, generatePlace } from '@/tests/helpers/factories';
 
-describe('routes/MyBookings/NewBooking', () => {
+describe('routes/MyBookings/EditBooking', () => {
   beforeEach(() => {
     addBookingOnServer(
       generateBooking({
